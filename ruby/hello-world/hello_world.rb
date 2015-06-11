@@ -1,5 +1,7 @@
+# method overloading?
+
 class HelloWorld
-	def self.hello
-		'Hello, World!'
+	def self.hello(name= 'World')
+		"Hello, #{name}!"
 	end
 end
