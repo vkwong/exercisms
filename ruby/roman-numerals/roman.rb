@@ -1,8 +1,6 @@
 class Fixnum
 
-	def to_roman
-
-		ROMAN_NUMERALS_MAPPING = {
+	ROMAN_NUMERALS_MAPPING = {
 		1 => "I",
 		4 => "IV",
 		5 => "V",
@@ -18,10 +16,11 @@ class Fixnum
 		1000 => "M"
 	}
 
+	def to_roman
 		roman_symbols = ""
 		arabic_numerals = self
 
-		ROMAN_NUMERALS_MAPPING.each_pair do |arabic, roman|
+		ROMAN_NUMERALS_MAPPING.each do |arabic, roman|
 			while arabic_numerals >= arabic
 				arabic_numerals -= arabic
 				roman_symbols << roman
