@@ -1,17 +1,17 @@
+# http://stackoverflow.com/questions/995593/what-does-or-equals-mean-in-ruby
 class Robot
 
 	LETTERS = ('A'..'Z').to_a
-	attr_reader :name
+
+	def name
+		@name ||= initialize
+	end
 
 	def initialize
-		@name = name
+		"#{LETTERS.sample(2).join('')}#{rand(0..9)}#{rand(0..9)}#{rand(0..9)}"
 	end
 
 	def reset
-		initialize
-	end
-
-	def name
-		"#{LETTERS.sample(2).join('')}#{rand(100..999)}"
+		@name = nil
 	end
 end
