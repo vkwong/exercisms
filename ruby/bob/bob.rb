@@ -3,7 +3,7 @@ class Bob
 		@remark = remark
 
 		if shouting
-			"Woah, chill out!"
+			"Whoa, chill out!"
 		elsif question
 			"Sure."
 		elsif silent
@@ -14,7 +14,7 @@ class Bob
 	end
 
 	def shouting
-		@remark
+		@remark == @remark.upcase &&  /[a-zA-Z]+/ =~ @remark
 	end
 
 	def question
