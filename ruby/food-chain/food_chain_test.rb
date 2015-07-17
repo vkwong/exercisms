@@ -22,7 +22,7 @@ class FoodChainTest < Minitest::Test
   # This is some simple book-keeping to let people who are
   # giving feedback know which version of the exercise you solved.
   def test_version
-    skip
+    #skip
     assert_equal 1, FoodChain::VERSION
   end
 end
