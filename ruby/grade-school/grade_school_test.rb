@@ -11,17 +11,18 @@ class SchoolTest < Minitest::Test
   end
 
   def test_an_empty_school
+    #skip
     assert_equal({}, school.to_hash)
   end
 
   def test_add_student
-    skip
+    #skip
     school.add('Aimee', 2)
     assert_equal({ 2 => ['Aimee'] }, school.to_hash)
   end
 
   def test_add_more_students_in_same_class
-    skip
+    #skip
     school.add('Blair', 2)
     school.add('James', 2)
     school.add('Paul', 2)
@@ -29,14 +30,14 @@ class SchoolTest < Minitest::Test
   end
 
   def test_add_students_to_different_grades
-    skip
+    #skip
     school.add('Chelsea', 3)
     school.add('Logan', 7)
     assert_equal({ 3 => ['Chelsea'], 7 => ['Logan'] }, school.to_hash)
   end
 
   def test_get_students_in_a_grade
-    skip
+    #skip
     school.add('Bradley', 5)
     school.add('Franklin', 5)
     school.add('Jeff', 1)
@@ -44,7 +45,7 @@ class SchoolTest < Minitest::Test
   end
 
   def test_get_students_sorted_in_a_grade
-    skip
+    #skip
     school.add('Franklin', 5)
     school.add('Bradley', 5)
     school.add('Jeff', 1)
@@ -52,12 +53,12 @@ class SchoolTest < Minitest::Test
   end
 
   def test_get_students_in_a_non_existant_grade
-    skip
+    #skip
     assert_equal [], school.grade(1)
   end
 
   def test_sort_school # rubocop:disable Metrics/MethodLength
-    skip
+    #skip
     [
       ['Jennifer', 4], ['Kareem', 6],
       ['Christopher', 4], ['Kyle', 3]
