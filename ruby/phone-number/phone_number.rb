@@ -1,44 +1,80 @@
 class PhoneNumber
 
-  attr_reader :number
+  attr_reader :phone_number
 
-  def initialize(num)
-    @number = trim_leading_one(remove_invalid_characters(number))
-    @number = '0000000000' unless valid? @number
+  def initialize(phone_number)
+    @phone_number = phone_number
   end
 
-  def to_s
-    "(#{area_code}) #{exchange_number}-#{local_number}"
+  def number
+    converter.to_phone_number
   end
 
   def area_code
-    num[0,3]
+    number[0..2]
   end
 
-  def exchange_number
-    num[3,3]
+  def middle_part
+    number[3..5]
   end
 
-  def local_number
-    num[6,4]
+  def last_part
+    number[6..9]
+  end
+
+  def to_s
+    "(#{area_code}) #{middle_part}-#{last_part}"
   end
 
   private
 
-  def remove_invalid_characters(number)
-    number.gsub(/[^a-z\d]/, '')
+    def converter
+      @converter ||= Converter.new(phone_number)
+    end
+end
+
+class Converter
+  
+  attr_reader :number
+
+  def initialize(input)
+    @number = input.scan(/\d/).join
   end
 
-  def trim_leading_one(number)
-    if number.length === 11 || number.length === 12
-      number.sub(/^1/,'')
+  def to_phone_number
+    case 
+    when phone_number_too_long? || phone_number_too_short? || phone_number_not_all_digits
+      invalid_phone_number
+    when phone_number_with_one_first?
+      phone_number_with_first_one_omitted
     else
       number
     end
   end
 
-  def valid?(number)
-    number.length === 10 && !number.match(/[a-z]/)
-  end
+  private
+  
+    def invalid_phone_number
+      "0000000000"
+    end
 
+    def phone_number_too_long?
+      number.length > 10 && number.chars.first != "1"
+    end
+
+    def phone_number_too_short?
+      number.length < 10
+    end
+
+    def phone_number_with_one_first?
+      number.length > 10 && number.chars.first == "1"
+    end
+
+    def phone_number_with_first_one_omitted
+      number[1..-1]
+    end
+
+    def phone_number_not_all_digits
+      number[/[0-9]+/] != number
+    end
 end
