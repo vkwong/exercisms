@@ -43,7 +43,9 @@ class Converter
 
   def to_phone_number
     case 
-    when phone_number_too_long? || phone_number_too_short? || phone_number_not_all_digits
+    when phone_number_too_long? || phone_number_too_short?
+      invalid_phone_number
+    when phone_number_includes_letters?
       invalid_phone_number
     when phone_number_with_one_first?
       phone_number_with_first_one_omitted
@@ -59,7 +61,7 @@ class Converter
     end
 
     def phone_number_too_long?
-      number.length > 10 && number.chars.first != "1"
+      (number.length > 10 && number.chars.first != "1") || (number.length > 11 && number.chars.first == "1")
     end
 
     def phone_number_too_short?
@@ -74,7 +76,7 @@ class Converter
       number[1..-1]
     end
 
-    def phone_number_not_all_digits
-      number[/[0-9]+/] != number
+    def phone_number_includes_letters
+      number[/^[0-9]+$/] != number
     end
 end
