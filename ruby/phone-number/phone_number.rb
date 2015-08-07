@@ -42,17 +42,23 @@ class Converter
   end
 
   def to_phone_number
-    case 
-    when phone_number_too_long? || phone_number_too_short?
-      invalid_phone_number
-    when phone_number_includes_letters?
-      invalid_phone_number
-    when phone_number_with_one_first?
-      phone_number_with_first_one_omitted
+    if valid?(number)
+      number[/(\d{10})\z/, 1]
     else
-      number
+      invalid_phone_number
     end
   end
+
+    # case 
+    # when phone_number_too_long? || phone_number_too_short?
+    #   invalid_phone_number
+    # when phone_number_includes_letters?
+    #   invalid_phone_number
+    # when phone_number_with_one_first?
+    #   phone_number_with_first_one_omitted
+    # else
+    #   number
+    # end
 
   private
   
@@ -60,23 +66,35 @@ class Converter
       "0000000000"
     end
 
-    def phone_number_too_long?
-      (number.length > 10 && number.chars.first != "1") || (number.length > 11 && number.chars.first == "1")
+    def valid?(number)
+      return true if number.length == 10
+      return true if number.length == 11 && number.start_with?('1')
+      false
     end
 
-    def phone_number_too_short?
-      number.length < 10
+    def clean(number)
+      return '0' * 10 if number.match(/[a-zA-Z]/)
+      number = number.gsub(/[^0-9]/, '')
+      to_phone_number
     end
 
-    def phone_number_with_one_first?
-      number.length > 10 && number.chars.first == "1"
-    end
+    # def phone_number_too_long?
+    #   (number.length > 10 && number.chars.first != "1") || (number.length > 11 && number.chars.first == "1")
+    # end
 
-    def phone_number_with_first_one_omitted
-      number[1..-1]
-    end
+    # def phone_number_too_short?
+    #   number.length < 10
+    # end
 
-    def phone_number_includes_letters
-      number[/^[0-9]+$/] != number
-    end
+    # def phone_number_with_one_first?
+    #   number.length > 10 && number.chars.first == "1"
+    # end
+
+    # def phone_number_with_first_one_omitted
+    #   number[1..-1]
+    # end
+
+    # def phone_number_includes_letters
+    #   number[/^[0-9]+$/] != number
+    # end
 end
