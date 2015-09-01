@@ -12,19 +12,17 @@ class Clock
     "%02d:%02d" % hours_and_minutes
   end
 
-  # def +(addition)
-  #   self.class.new(@minutes + addition)
-  # end
+  def +(addition)
+    self.class.new(@minutes + addition)
+  end
 
-  # def -(subtraction)
-  #   self.class.new(@minutes - subtraction)
-  # end
+  def -(subtraction)
+    self.class.new(@minutes - subtraction)
+  end
 
-  # def ==(other)
-  #   self.hours_and_minutes == other.hours_and_minutes
-  # end
-
-  private
+  def ==(other)
+    self.hours_and_minutes == other.hours_and_minutes
+  end
 
   def hours_and_minutes
     hours, minutes = @minutes.divmod(60)
