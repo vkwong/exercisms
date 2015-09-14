@@ -11,14 +11,14 @@ class QueensTest < Minitest::Test
   end
 
   def test_specific_placement
-    skip
+    #skip
     queens = Queens.new(white: [3, 7], black: [6, 1])
     assert_equal [3, 7], queens.white
     assert_equal [6, 1], queens.black
   end
 
   def test_multiple_boards_simultaneously
-    skip
+    #skip
     queens1 = Queens.new(white: [3, 7], black: [6, 1])
     queens2 = Queens.new(white: [5, 4], black: [7, 7])
     assert_equal [3, 7], queens1.white
@@ -28,7 +28,7 @@ class QueensTest < Minitest::Test
   end
 
   def test_cannot_occupy_same_space
-    skip
+    #skip
     assert_raises ArgumentError do
       Queens.new(white: [2, 4], black: [2, 4])
     end
@@ -84,38 +84,38 @@ _ _ _ _ _ _ _ _
   end
 
   def test_cannot_attack
-    skip
+    #skip
     queens = Queens.new(white: [2, 3], black: [4, 7])
     assert !queens.attack?
   end
   # rubocop:enable Metrics/MethodLength
 
   def test_can_attack_on_same_row
-    skip
+    #skip
     queens = Queens.new(white: [2, 4], black: [2, 7])
     assert queens.attack?
   end
 
   def test_can_attack_on_same_column
-    skip
+    #skip
     queens = Queens.new(white: [5, 4], black: [2, 4])
     assert queens.attack?
   end
 
   def test_can_attack_on_diagonal
-    skip
+    #skip
     queens = Queens.new(white: [1, 1], black: [6, 6])
     assert queens.attack?
   end
 
   def test_can_attack_on_other_diagonal
-    skip
+    #skip
     queens = Queens.new(white: [0, 6], black: [1, 7])
     assert queens.attack?
   end
 
   def test_can_attack_on_yet_another_diagonal
-    skip
+    #skip
     queens = Queens.new(white: [4, 1], black: [6, 3])
     assert queens.attack?
   end
