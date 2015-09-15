@@ -49,7 +49,7 @@ class Queens
     when white then "W"
     when black then "B"
     else
-      "O"
+      "_"
     end
   end
 end
